@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Northwind Goods</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        color: red;
+        font-family: "Comic Sans MS", "Comic Sans", cursive;
+      }
+
+      body {
+        margin: 0;
+        background: #fff8dc;
+      }
+
+      main {
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 32px 20px 64px;
+      }
+
+      button {
+        background: lime;
+        border: 4px solid blue;
+        color: purple;
+        font-size: 20px;
+      }
+
+      p {
+        background: yellow;
+      }
+
+      a {
+        color: deeppink;
+      }
+
+      label {
+        display: block;
+        margin: 16px 0;
+      }
+
+      #abra-root {
+        margin-top: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p>Northwind Goods</p>
+      <h1>Canvas tote</h1>
+      <p>Heavyweight cotton tote. This page stands in for a merchant theme you do not control.</p>
+      <label>
+        Cart subtotal
+        <input id="subtotal" type="range" min="0" max="120" value="57" />
+      </label>
+      <p id="subtotal-readout">$57.00</p>
+      <button type="button">Add to cart</button>
+      <div id="abra-root"></div>
+    </main>
+    <script type="module" src="/src/demo/bootstrap.ts"></script>
+  </body>
+</html>
