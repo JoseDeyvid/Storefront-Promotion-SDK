@@ -133,9 +133,159 @@ Do not weaken the existing shape test. Add:
 
 Optional if time remains: remember dismiss for the rest of the browser session with `sessionStorage`.
 
+
+
 ## Public API
 
-You write this. Include the version, each method, the event names and payloads, and what counts as a breaking change.
+### Version
+
+Current version: `1.0.0`
+
+The SDK follows Semantic Versioning (SemVer):
+
+- **MAJOR:** Breaking changes to public methods, event names, payloads, or behavior.
+
+- **MINOR:** New backward-compatible functionality.
+
+- **PATCH:** Backward-compatible bug fixes.
+
+### Initialization
+
+```ts
+
+Abra.init({
+
+  target: document.querySelector("#abra-root")!,
+
+  config: {
+
+    threshold: 75,
+
+    rewardLabel: "free tote",
+
+    code: "GIFT75",
+
+    colors: {
+
+      background: "#111827",
+
+      text: "#f9fafb",
+
+      accent: "#f59e0b",
+
+    },
+
+  },
+
+  subtotal: 57,
+
+});
+
+```
+
+Creates and mounts an `<abra-promo>` element inside the provided target.
+
+Returns the initialized `AbraPromoElement`.
+
+Calling `init()` again destroys the previous instance before mounting the new one.
+
+### Update
+
+```ts
+
+Abra.update({
+
+  subtotal: 60,
+
+});
+
+```
+
+Updates the existing widget without replacing its DOM element.
+
+Accepts:
+
+- `subtotal`: Optional cart subtotal.
+
+- `config`: Optional promotion configuration.
+
+Throws an error if called before initialization.
+
+### Destroy
+
+```ts
+
+Abra.destroy();
+
+```
+
+Removes the mounted widget and clears event subscriptions.
+
+### Subscribe to events
+
+```ts
+
+const unsubscribe = Abra.on("abra:apply", (event) => {
+
+  console.log(event.detail.promoCode);
+
+});
+
+```
+
+Supported events:
+
+| Event | Payload |
+
+|---|---|
+
+| `abra:apply` | `{ promoCode: string }` |
+
+| `abra:dismiss` | `null` |
+
+Both events are dispatched from the custom element and cross the Shadow DOM boundary.
+
+`on()` returns an unsubscribe function.
+
+### Unsubscribe from events
+
+Using the returned function:
+
+```ts
+
+unsubscribe();
+
+```
+
+Or using `off()`:
+
+```ts
+
+Abra.off("abra:apply", handler);
+
+```
+
+The same handler reference must be provided to `off()`.
+
+### Versioning policy
+
+Changes that break existing integrations require a major version increment.
+
+Examples:
+
+- Renaming or removing a public method.
+
+- Changing required initialization options.
+
+- Renaming an event.
+
+- Changing an event payload structure.
+
+- Changing documented behavior in an incompatible way.
+
+New optional methods and backward-compatible improvements can be released as minor versions. Bug fixes can be released as patch versions.
+
+
 
 ## Tradeoffs
 

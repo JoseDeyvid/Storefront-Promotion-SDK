@@ -97,6 +97,17 @@ footer {
   font-size: 13px;
 }
 
+.error {
+  display: block;
+  color: #dc2626;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+input[aria-invalid="true"] {
+  border-color: #dc2626;
+}
+
 @media (max-width: 800px) {
   .layout,
   .colors {
